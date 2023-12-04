@@ -22,15 +22,18 @@ const WeatherPage = async ({ params: { city, lat, long } }: Props) => {
     },
   });
   const results: Root = data.myQuery;
-  console.log(results);
   return (
     <div>
       {/* Information panel */}
-      <div>
-        <div>
-          <div>
-            <h2>Todays Overview</h2>
-            <p>Last Updated at: </p>
+      <div className=''>
+        <div className='p-5'>
+          <div className='pb-5'>
+            <h2 className='text-xl font-bold'>Todays Overview</h2>
+            <p>
+              Last Updated at:
+              {new Date(results.current_weather.time).toLocaleString()} (
+              {results.timezone})
+            </p>
           </div>
         </div>
       </div>
