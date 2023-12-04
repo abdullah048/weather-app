@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.8",
     "@heroicons/react": "^2.0.18",
     "@tremor/react": "^3.6.0",
     "@types/node": "20.4.5",
@@ -16,6 +17,7 @@
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.14",
     "country-state-city": "^3.1.4",
+    "graphql": "^16.8.1",
     "next": "13.4.12",
     "postcss": "8.4.27",
     "react": "18.2.0",
