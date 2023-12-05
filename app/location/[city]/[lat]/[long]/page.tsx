@@ -1,6 +1,9 @@
 import { getClient } from '@src/apollo-client';
 import CalloutCard from '@src/components/Calloutcard';
+import InformationPanel from '@src/components/InformationPanel';
+import RainChart from '@src/components/RainChart';
 import StatCard from '@src/components/StatCard';
+import TemperatureChart from '@src/components/TemperatureChart';
 import fetchWeatherQuery from '@src/graphql/queries/fetchWeatherQuery';
 import React from 'react';
 
@@ -25,9 +28,9 @@ const WeatherPage = async ({ params: { city, lat, long } }: Props) => {
   });
   const results: Root = data.myQuery;
   return (
-    <div>
-      {/* Information panel */}
-      <div className=''>
+    <div className='flex flex-col min-h-screen md:flex-row'>
+      <InformationPanel city={city} lat={lat} long={long} results={results} />
+      <div className='flex-1 p-5'>
         <div className='p-5'>
           <div className='pb-5'>
             <h2 className='text-xl font-bold'>Todays Overview</h2>
@@ -78,6 +81,11 @@ const WeatherPage = async ({ params: { city, lat, long } }: Props) => {
           </div>
         </div>
         <hr className='mb-5' />
+        <div className='space-y-3'>
+          <TemperatureChart results={results} />
+          <RainChart results={results} />
+          {/* Humidity Chart */}
+        </div>
       </div>
     </div>
   );
