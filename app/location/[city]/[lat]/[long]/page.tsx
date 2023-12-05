@@ -1,4 +1,6 @@
 import { getClient } from '@src/apollo-client';
+import CalloutCard from '@src/components/Calloutcard';
+import StatCard from '@src/components/StatCard';
 import fetchWeatherQuery from '@src/graphql/queries/fetchWeatherQuery';
 import React from 'react';
 
@@ -29,13 +31,53 @@ const WeatherPage = async ({ params: { city, lat, long } }: Props) => {
         <div className='p-5'>
           <div className='pb-5'>
             <h2 className='text-xl font-bold'>Todays Overview</h2>
-            <p>
+            <p className='text-sm text-gray-400'>
               Last Updated at:
               {new Date(results.current_weather.time).toLocaleString()} (
               {results.timezone})
             </p>
           </div>
+
+          <div>{/* Callout card */}</div>
+          <div className='grid grid-cols-1 lg:grid-cols-2 gap-5 m-2'>
+            <StatCard
+              title='Maximum temperature'
+              metric={`${results.daily.temperature_2m_max[0].toFixed(1)}˚`}
+              color='yellow'
+            />
+            <StatCard
+              title='Minimum temperature'
+              metric={`${results.daily.temperature_2m_min[0].toFixed(1)}˚`}
+              color='green'
+            />
+            <div>
+              <StatCard
+                title='UV Index'
+                metric={`${results.daily.uv_index_max[0].toFixed(1)}˚`}
+                color='rose'
+              />
+              {Number(results.daily.uv_index_max[0].toFixed(1)) > 5 && (
+                <CalloutCard
+                  message='The UV is high today, be sure to wear SPF!'
+                  warning
+                />
+              )}
+            </div>
+            <div className='flex space-x-3'>
+              <StatCard
+                title='Wind Speed'
+                metric={`${results.current_weather.windspeed.toFixed(1)}m/s`}
+                color='cyan'
+              />
+              <StatCard
+                title='Wind Direction'
+                metric={`${results.current_weather.windspeed.toFixed(1)}˚`}
+                color='violet'
+              />
+            </div>
+          </div>
         </div>
+        <hr className='mb-5' />
       </div>
     </div>
   );
