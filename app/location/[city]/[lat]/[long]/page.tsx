@@ -1,11 +1,14 @@
 import { getClient } from '@src/apollo-client';
 import CalloutCard from '@src/components/Calloutcard';
+import HumidityChart from '@src/components/HumidityChart';
 import InformationPanel from '@src/components/InformationPanel';
 import RainChart from '@src/components/RainChart';
 import StatCard from '@src/components/StatCard';
 import TemperatureChart from '@src/components/TemperatureChart';
 import fetchWeatherQuery from '@src/graphql/queries/fetchWeatherQuery';
 import React from 'react';
+
+export const revalidate = 60;
 
 type Props = {
   params: {
@@ -84,7 +87,7 @@ const WeatherPage = async ({ params: { city, lat, long } }: Props) => {
         <div className='space-y-3'>
           <TemperatureChart results={results} />
           <RainChart results={results} />
-          {/* Humidity Chart */}
+          <HumidityChart results={results} />
         </div>
       </div>
     </div>
